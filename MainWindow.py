@@ -1,4 +1,5 @@
 import csv
+import numpy as np
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QFileDialog,
@@ -107,6 +108,18 @@ class MainWindow(QMainWindow):
         self.ax.clear()
 
         self.ax.scatter(self.temperatures, self.revenues, s=1)
+        if self.temperatures:
+            m, b = np.polyfit(self.temperatures, self.revenues, 1)
+            x_line = np.array([min(self.temperatures), max(self.temperatures)])
+            y_line = m * x_line + b
+            self.ax.plot(
+                x_line,
+                y_line,
+                color="red",
+                linewidth=1.5,
+                label=f"y = {m:.2f}x + {b:.2f}",
+            )
+            self.ax.legend()
 
         self.ax.set_title("Ice Cream Truck Revenue vs. Temperature")
         self.ax.set_xlabel("Temperature (°C)")
