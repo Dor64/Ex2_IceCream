@@ -1,0 +1,92 @@
+/* Global Window & Widget Styling */
+QMainWindow, QDialog {
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-family: "Segoe UI", "Inter", sans-serif;
+    font-size: 13px;
+}
+
+QWidget {
+    color: #0f172a;
+    font-family: "Segoe UI", "Inter", sans-serif;
+    font-size: 13px;
+}
+
+/* Labels */
+QLabel#titleLabel {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+QLabel#aboutTitleLabel {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+QLabel#aboutTextLabel, QLabel#aboutLinkLabel {
+    font-size: 13px;
+    color: #334155;
+}
+
+/* Push Buttons */
+QPushButton {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 600;
+}
+
+QPushButton:hover {
+    background-color: #1d4ed8;
+}
+
+QPushButton:pressed {
+    background-color: #1e40af;
+}
+
+QPushButton#secondaryButton {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+
+QPushButton#secondaryButton:hover {
+    background-color: #cbd5e1;
+}
+
+QPushButton#secondaryButton:pressed {
+    background-color: #94a3b8;
+}
+
+/* Chart Container & Toolbar */
+QFrame#chartContainer {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+QToolBar#chartToolbar {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px;
+    spacing: 4px;
+}
+
+QToolBar#chartToolbar QToolButton {
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QToolBar#chartToolbar QToolButton:hover {
+    background-color: #e2e8f0;
+}
+
+QToolBar#chartToolbar QToolButton:checked,
+QToolBar#chartToolbar QToolButton:pressed {
+    background-color: #cbd5e1;
+}
