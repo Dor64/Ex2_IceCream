@@ -1,3 +1,4 @@
+import csv
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QFileDialog,
@@ -22,8 +23,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Ice Cream Sales Analysis")
         self.resize(850, 620)
 
-        # TODO: Initialize your two data lists here (e.g., temperatures and revenues)
-
+        self.temperatures = []
+        self.revenues = []
         self.selected_file = ""
 
         self._setup_ui()
@@ -88,28 +89,31 @@ class MainWindow(QMainWindow):
         )
         if file_path:
             self.selected_file = file_path
+            self.temperatures = []
+            self.revenues = []
 
-            # TODO: Read the CSV file from file_path, populate your data lists, and call self.plot_graph()
+            with open(self.selected_file, mode="r", encoding="utf-8") as file:
+                reader = csv.reader(file)
+                next(reader)  # מדלג על שורת הכותרת (Temperature,Revenue)
+
+                for row in reader:
+                    if row:
+                        self.temperatures.append(float(row[0]))
+                        self.revenues.append(float(row[1]))
+
+            self.plot_graph()
 
     def plot_graph(self):
         self.ax.clear()
 
-        # TODO: Replace this temporary placeholder plotting logic with your own plot
-        dummy_x = [10, 20, 30, 40]
-        dummy_y = [250, 500, 700, 900]
-        self.ax.plot(
-            dummy_x,
-            dummy_y,
-            marker="o",
-            linestyle="--",
-            color="#2563eb",
-            label="Placeholder Data",
-        )
-        self.ax.set_title("Ice Cream Sales (Placeholder Chart)")
+        self.ax.scatter(self.temperatures, self.revenues, s=1)
+
+        self.ax.set_title("Ice Cream Truck Revenue vs. Temperature")
         self.ax.set_xlabel("Temperature (°C)")
         self.ax.set_ylabel("Revenue ($)")
-        self.ax.grid(True, linestyle=":", alpha=0.6)
-        self.ax.legend()
+
+        self.ax.spines["top"].set_visible(False)
+        self.ax.spines["right"].set_visible(False)
 
         self.figure.tight_layout()
         self.canvas.draw()
